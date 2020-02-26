@@ -1,6 +1,9 @@
 import React from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { getApiUrl } from '../../helpers/getApiUrl';
+import { Main } from '../../layout/main';
+import { SearchBar } from '../../components/searchBar';
+import { List } from '../../components/list';
 
 export const Home = () => {
   const url = getApiUrl();
@@ -15,6 +18,10 @@ export const Home = () => {
   console.log(results);
 
   return (
-    <div>{JSON.stringify(results)}</div>
+    <Main>
+      <h3>Search your character</h3>
+      <SearchBar placeholder="Name of character" />
+      <List />
+    </Main>
   );
 };

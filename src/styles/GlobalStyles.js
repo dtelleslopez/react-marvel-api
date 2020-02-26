@@ -24,10 +24,16 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;    
   }
 
+  h3, h4, h5, p {
+    margin: 0;
+  }
+
   h3 {
     color: ${Colors.GREY_1};
     font-size: 48px;
     font-weight: 900;
+    line-height: 56px;
+    margin-bottom: 36px;
   }
 
   h4 {
