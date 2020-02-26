@@ -14,14 +14,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-color: ${Colors.BACKGROUND};   
     margin: 0;
-    height: 100vh;
-    width: 100%;
-  }
-
-  #app {
-    background-color: ${Colors.BACKGROUND};
-    min-height: 100vh;    
   }
 
   h3, h4, h5, p {
