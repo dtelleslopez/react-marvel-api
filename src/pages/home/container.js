@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { Home } from './component';
 import { fetchCharacters } from '../../actions';
-import { getCharacters } from '../../selectors';
+import { getCharacters, getIsLoading } from '../../selectors';
 
 const mapStateToProps = (state) => ({
   characters: getCharacters(state),
+  isLoading: getIsLoading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

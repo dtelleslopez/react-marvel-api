@@ -6,7 +6,7 @@ import { ListItem } from '../../components/listItem';
 
 import { Search } from './styles';
 
-export const Home = ({ characters, fetchCharacters }) => {
+export const Home = ({ characters, isLoading, fetchCharacters }) => {
   useEffect(() => {
     fetchCharacters();
   }, []);
@@ -17,7 +17,7 @@ export const Home = ({ characters, fetchCharacters }) => {
         <h3>Search your character</h3>
         <SearchBar placeholder="Name of character" />
       </Search>
-      <List>
+      <List loading={isLoading}>
         {characters.map(({ id, ...item }) => (
           <ListItem key={id} {...item} />
         ))}
