@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import * as Colors from '../../styles/Colors';
+import { Button } from '../button';
 
 export const Wrapper = styled.div`
+  box-sizing: content-box;
   flex-grow: 1;
   height: 460px;
-  max-width: 33%;
-  padding: 16px;
+  max-width: calc(33% - 34px);
+  padding: 14px 18px;
   width: 100%;
 `;
 
@@ -14,9 +16,15 @@ export const Card = styled.div`
   border-radius: 5px;
   border: 2px solid ${Colors.GREY_4};
   height: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
-export const Preview = styled.div`
+export const Thumbnail = styled.div`
+  background-image: ${(props) => (props.path && `url(${props.path})`)};
+  background-position: ${(props) => (props.path && props.path.includes('image_not_available') ? 'center bottom' : 'center')};
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 230px;
 `;
 
@@ -25,7 +33,12 @@ export const Content = styled.div`
 `;
 
 export const Name = styled.h5`
-  margin-bottom: 12px;
+  line-height: 135%;
+  margin-bottom: 6px;
+  margin-top: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Description = styled.p`
@@ -34,5 +47,12 @@ export const Description = styled.p`
   display: -webkit-box;
   font-style: ${(props) => (props.empty ? 'italic' : 'normal')};
   font-weight: ${(props) => (props.empty ? 'normal' : 500)};
+  line-height: 135%;
   overflow: hidden;
+`;
+
+export const ReadMore = styled(Button)`
+  bottom: 24px;
+  position: absolute;
+  right: 24px;
 `;

@@ -2,11 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import * as Colors from './Colors';
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:500,700,900&display=swap');  
-
   html {
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', serif;
   }
 
   *, *::before, *::after {
