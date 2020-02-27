@@ -16,8 +16,9 @@ export const CustomButton = styled.button`
   &:hover,
   &:focus,
   &:active {
-    color: ${Colors.GREY_1};
     background-color: ${Colors.WHITE};
+    color: ${Colors.GREY_1};
+    outline: none;
 
     svg {
       path {

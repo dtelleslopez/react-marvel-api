@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as Colors from '../../styles/Colors';
 
-export const Search = styled.div`
+export const Form = styled.form`
   display: flex;
   width: 100%;
   max-width: 540px;
@@ -31,14 +31,22 @@ export const Input = styled.input`
   }
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   background: ${Colors.MARVEL};
   border-radius: 0px 5px 5px 0px;
   color: #fff;
   cursor: pointer;
   font-size: 20px;
   height: 56px;
-  line-height: 62px;
+  line-height: 56px;
   min-width: 56px;
   text-align: center;
+
+  :active {
+    border-style: solid;
+  }
+
+  :focus {
+    outline: none;
+  }
 `;

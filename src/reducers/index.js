@@ -16,7 +16,7 @@ function rootReducer(state = initialState, action) {
     case CHARACTERS_FETCH_SUCCEEDED:
       return {
         ...state,
-        characters: state.characters.concat(action.payload),
+        characters: action.payload,
         isLoading: false,
       };
     case CHARACTERS_FETCH_FAILED:

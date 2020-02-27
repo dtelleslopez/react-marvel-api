@@ -6,9 +6,9 @@ import {
   CHARACTERS_FETCH_FAILED,
 } from '../constants/action-types';
 
-function* fetchCharacters() {
+function* fetchCharacters(action) {
   try {
-    const characters = yield call(Api.fetchCharacters);
+    const characters = yield call(Api.fetchCharacters, action.payload);
     yield put({ type: CHARACTERS_FETCH_SUCCEEDED, payload: characters });
   } catch (e) {
     yield put({ type: CHARACTERS_FETCH_FAILED, message: e.message });

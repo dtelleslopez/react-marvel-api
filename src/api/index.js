@@ -11,8 +11,8 @@ const generateUrl = () => {
   return url;
 };
 
-export const fetchCharacters = async () => {
-  const url = generateUrl();
+export const fetchCharacters = async (name) => {
+  const url = `${generateUrl()}${name ? `&name=${name}` : ''}`;
   const response = await fetch(url);
   const json = await response.json();
   const { data: { results = [] } = {} } = json;
