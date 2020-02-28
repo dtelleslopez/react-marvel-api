@@ -7,9 +7,9 @@ import {
 } from './styles';
 
 export const ListItem = ({
-  name, description, thumbnail: { path, extension }, urls,
+  style, name, description, thumbnail: { path, extension }, urls,
 }) => (
-  <Wrapper>
+  <Wrapper style={style}>
     <Card>
       <Thumbnail path={`${path}.${extension}`} />
       <Content>

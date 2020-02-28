@@ -3,20 +3,9 @@ import * as Colors from '../../styles/Colors';
 import { Button } from '../button';
 
 export const Wrapper = styled.div`
-  box-sizing: content-box;
-  flex-grow: 1;
-  height: 460px;
-  max-width: calc(33% - 36px);
+  box-sizing: border-box;
   padding: 14px 18px;
   width: 100%;
-
-  @media only screen and (max-width: 1200px) {
-    max-width: calc(50% - 36px);
-  }
-
-  @media only screen and (max-width: 768px) {
-    max-width: calc(100% - 36px);
-  }
 `;
 
 export const Card = styled.div`

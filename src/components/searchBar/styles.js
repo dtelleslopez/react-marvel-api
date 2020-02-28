@@ -34,6 +34,7 @@ export const Input = styled.input`
 export const Button = styled.button`
   background: ${Colors.MARVEL};
   border-radius: 0px 5px 5px 0px;
+  border: 0;
   color: #fff;
   cursor: pointer;
   font-size: 20px;

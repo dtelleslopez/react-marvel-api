@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-family: 'Roboto', serif;
+    height: 100%;
   }
 
   *, *::before, *::after {
@@ -13,7 +14,12 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${Colors.BACKGROUND};   
+    height: 100%;
     margin: 0;
+  }
+
+  #app {
+    height: 100%;
   }
 
   h3, h4, h5, p {

@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 52px 44px;
+  margin: 52px 42px 0;
   position: relative;
 
   @media only screen and (max-width: 768px) {
-    margin: 52px 2px;
+    margin: 52px 2px 0;
   }
 `;
 
