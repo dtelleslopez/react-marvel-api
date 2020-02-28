@@ -16,7 +16,7 @@ function rootReducer(state = initialState, action) {
     case CHARACTERS_FETCH_SUCCEEDED:
       return {
         ...state,
-        characters: action.payload,
+        characters: [...state.characters, ...action.payload],
         isLoading: false,
       };
     case CHARACTERS_FETCH_FAILED:

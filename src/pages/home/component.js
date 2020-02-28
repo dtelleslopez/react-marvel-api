@@ -12,7 +12,7 @@ export const Home = ({ characters, isLoading, fetchCharacters }) => {
   }, []);
 
   const handleOnSubmit = (name) => {
-    fetchCharacters(name);
+    fetchCharacters({ name });
   };
 
   return (
@@ -24,6 +24,7 @@ export const Home = ({ characters, isLoading, fetchCharacters }) => {
       <List
         items={characters}
         loading={isLoading}
+        loadMoreItems={() => fetchCharacters({ page: 1 })}
       />
     </Main>
   );

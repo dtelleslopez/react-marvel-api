@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import InfiniteLoader from 'react-window-infinite-loader';
 import { FixedSizeGrid } from 'react-window';
 import ResizeObserver from 'resize-observer-polyfill';
 import { ListItem } from '../listItem';
@@ -7,21 +8,24 @@ import { Loading } from '../loading';
 
 import { Container, Paragraph } from './styles';
 
-export const List = ({ loading, items }) => {
-  const ref = useRef(null);
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [columns, setColumns] = useState(0);
-  const [rows, setRows] = useState(0);
+const ROW_HEIGHT = 488;
+const ITEM_COUNT = 1000;
+
+export const List = ({ items, loading, loadMoreItems }) => {
+  const [height, setHeight] = useState(600);
+  const [width, setWidth] = useState(1230);
+  const [columns, setColumns] = useState(3);
+
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const container = ref.current;
+    const container = containerRef.current;
 
     if (!container) {
       return;
     }
 
-    function handleResize() {
+    const handleResize = () => {
       const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
       const { top, width: containerWidth } = container.getBoundingClientRect();
 
@@ -35,17 +39,13 @@ export const List = ({ loading, items }) => {
 
       setHeight(viewHeight - top);
       setWidth(containerWidth);
-    }
+    };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
   }, []);
 
-  useEffect(() => {
-    setRows(Math.ceil(items.length / columns) || 0);
-  }, [items.length]);
-
-  function renderRow({ columnIndex, rowIndex, style }) {
+  const renderRow = ({ columnIndex, rowIndex, style }) => {
     const index = (rowIndex * columns) + columnIndex;
 
     if (!items[index]) {
@@ -55,22 +55,52 @@ export const List = ({ loading, items }) => {
     const { id, ...item } = items[index];
 
     return (<ListItem key={item.id} style={style} {...item} />);
-  }
+  };
+
+  const handleLoadMoreItems = () => {
+    loadMoreItems();
+  };
+
+  const handleOnItemsRendered = (onItemsRendered) => ({
+    visibleColumnStartIndex,
+    visibleColumnStopIndex,
+    visibleRowStartIndex,
+    visibleRowStopIndex,
+  }) => {
+    const visibleStartIndex = (visibleRowStartIndex * columns) + visibleColumnStartIndex;
+    let visibleStopIndex = (visibleRowStopIndex * columns) + visibleColumnStopIndex;
+
+    if (!items[visibleStopIndex]) {
+      visibleStopIndex -= 1;
+    }
+
+    onItemsRendered({ visibleStartIndex, visibleStopIndex });
+  };
 
   return (
-    <Container ref={ref}>
+    <Container ref={containerRef}>
       {loading && (<Loading />)}
       {!loading && items.length === 0 && (<Paragraph>No results :(</Paragraph>)}
-      <FixedSizeGrid
-        columnCount={columns}
-        height={height}
-        columnWidth={(width / columns) || 0}
-        width={width}
-        rowCount={rows}
-        rowHeight={488}
+      <InfiniteLoader
+        isItemLoaded={(index) => index < items.length}
+        loadMoreItems={handleLoadMoreItems}
+        itemCount={ITEM_COUNT}
       >
-        {renderRow}
-      </FixedSizeGrid>
+        {({ onItemsRendered, ref }) => (
+          <FixedSizeGrid
+            onItemsRendered={handleOnItemsRendered(onItemsRendered)}
+            columnCount={columns}
+            height={height}
+            columnWidth={width / columns}
+            width={width}
+            rowCount={Math.ceil(items.length / columns)}
+            rowHeight={ROW_HEIGHT}
+            ref={ref}
+          >
+            {renderRow}
+          </FixedSizeGrid>
+        )}
+      </InfiniteLoader>
     </Container>
   );
 };
@@ -90,6 +120,7 @@ List.propTypes = {
     })),
   })).isRequired,
   loading: PropTypes.bool,
+  loadMoreItems: PropTypes.func.isRequired,
 };
 
 List.defaultProps = {
