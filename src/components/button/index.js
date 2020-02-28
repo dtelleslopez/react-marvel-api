@@ -4,8 +4,10 @@ import { ArrowIcon } from '../../assets/arrowIcon';
 
 import { CustomButton } from './styles';
 
-export const Button = ({ className, label, type }) => (
-  <CustomButton className={className}>
+export const Button = ({
+  className, label, type, ...others
+}) => (
+  <CustomButton className={className} {...others}>
     {label}
     {type === 'arrow' && (<ArrowIcon />)}
   </CustomButton>

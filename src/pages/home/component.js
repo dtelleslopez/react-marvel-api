@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Main } from '../../layout/main';
 import { SearchBar } from '../../components/searchBar';
 import { List } from '../../components/list';
 import { ListItem } from '../../components/listItem';
 
-import { Search, NoResults } from './styles';
+import { Search } from './styles';
 
 export const Home = ({ characters, isLoading, fetchCharacters }) => {
   useEffect(() => {
@@ -28,4 +29,22 @@ export const Home = ({ characters, isLoading, fetchCharacters }) => {
       </List>
     </Main>
   );
+};
+
+Home.propTypes = {
+  characters: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    thumbnail: PropTypes.shape({
+      path: PropTypes.string,
+      extension: PropTypes.string,
+    }),
+    urls: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.string,
+      url: PropTypes.string,
+    })),
+  })).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  fetchCharacters: PropTypes.func.isRequired,
 };

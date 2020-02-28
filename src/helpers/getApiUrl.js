@@ -1,6 +1,6 @@
 import md5 from 'crypto-js/md5';
 
-export const getApiUrl = () => {
+const getApiUrl = () => {
   const ts = new Date().getTime();
   const apikey = process.env.MARVEL_API_KEY;
   const privateKey = process.env.MARVEL_API_PRIVATE_KEY;
@@ -10,3 +10,5 @@ export const getApiUrl = () => {
 
   return url;
 };
+
+export default getApiUrl;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as Colors from '../../styles/Colors';
 
-export const CustomButton = styled.button`
+export const CustomButton = styled.a`
   background-color: ${Colors.GREY_1};
   border-radius: 5px;
   border: 2px solid ${Colors.GREY_1};
@@ -12,6 +12,7 @@ export const CustomButton = styled.button`
   font-weight: bold;
   line-height: 135%;
   padding: 12px 22px;
+  text-decoration: none;
 
   &:hover,
   &:focus,
