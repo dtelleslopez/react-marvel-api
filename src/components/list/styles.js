@@ -5,6 +5,10 @@ export const Container = styled.div`
   flex-wrap: wrap;
   margin: 52px 44px;
   position: relative;
+
+  @media only screen and (max-width: 768px) {
+    margin: 52px 2px;
+  }
 `;
 
 export const Paragraph = styled.p`

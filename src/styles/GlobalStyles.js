@@ -26,6 +26,14 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 900;
     line-height: 56px;
     margin-bottom: 36px;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 42px;
+      margin-bottom: 30px;
+    }
   }
 
   h4 {
