@@ -6,7 +6,9 @@ import { List } from '../../components/list';
 
 import { Search } from './styles';
 
-export const Home = ({ characters, isLoading, fetchCharacters }) => {
+export const Home = ({
+  isLoading, pagination, characters, fetchCharacters, fetchMoreCharacters,
+}) => {
   useEffect(() => {
     fetchCharacters();
   }, []);
@@ -23,14 +25,21 @@ export const Home = ({ characters, isLoading, fetchCharacters }) => {
       </Search>
       <List
         items={characters}
+        total={pagination.total}
         loading={isLoading}
-        loadMoreItems={() => fetchCharacters({ page: 1 })}
+        loadMoreItems={() => fetchMoreCharacters({ pagination })}
       />
     </Main>
   );
 };
 
 Home.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  pagination: PropTypes.shape({
+    page: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+  }).isRequired,
   characters: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -44,6 +53,6 @@ Home.propTypes = {
       url: PropTypes.string,
     })),
   })).isRequired,
-  isLoading: PropTypes.bool.isRequired,
   fetchCharacters: PropTypes.func.isRequired,
+  fetchMoreCharacters: PropTypes.func.isRequired,
 };

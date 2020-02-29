@@ -1,12 +1,13 @@
 import getApiUrl from '../helpers/getApiUrl';
 
-export const fetchCharacters = async ({ name, page } = {}) => {
-  const limit = 20;
-  const url = `${getApiUrl()}${name ? `&name=${name}` : ''}${page ? `&limit=${limit}&offset=${page * limit}` : ''}`;
-  console.log(url);
+export const fetchCharacters = async ({ name, pagination } = {}) => {
+  const url = `${getApiUrl()}${name ? `&name=${name}` : ''}${pagination ? `&limit=${pagination.limit}&offset=${pagination.page * pagination.limit}` : ''}`;
   const response = await fetch(url);
   const json = await response.json();
-  const { data: { results = [] } = {} } = json;
+  const { data: { total = 0, results: characters = [] } = {} } = json;
 
-  return results;
+  return {
+    total,
+    characters,
+  };
 };

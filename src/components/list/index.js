@@ -11,7 +11,9 @@ import { Container, Paragraph } from './styles';
 const ROW_HEIGHT = 488;
 const ITEM_COUNT = 1000;
 
-export const List = ({ items, loading, loadMoreItems }) => {
+export const List = ({
+  items, total, loading, search, loadMoreItems,
+}) => {
   const [height, setHeight] = useState(600);
   const [width, setWidth] = useState(1230);
   const [columns, setColumns] = useState(3);
@@ -84,7 +86,7 @@ export const List = ({ items, loading, loadMoreItems }) => {
       <InfiniteLoader
         isItemLoaded={(index) => index < items.length}
         loadMoreItems={handleLoadMoreItems}
-        itemCount={ITEM_COUNT}
+        itemCount={total || ITEM_COUNT}
       >
         {({ onItemsRendered, ref }) => (
           <FixedSizeGrid
@@ -119,6 +121,7 @@ List.propTypes = {
       url: PropTypes.string,
     })),
   })).isRequired,
+  total: PropTypes.number.isRequired,
   loading: PropTypes.bool,
   loadMoreItems: PropTypes.func.isRequired,
 };
