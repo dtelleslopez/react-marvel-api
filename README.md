@@ -1,3 +1,5 @@
+![Preview](https://bitbucket.org/dtelleslopez/react-marvel-api/raw/c97601301ecd9dd8db0eaed627ee63ad271865ff/captures/screenshot-1.png)
+
 This project is part of Stayforlong technical test.
 
 ## Live demo
