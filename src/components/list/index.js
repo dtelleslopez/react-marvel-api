@@ -31,20 +31,26 @@ export const List = ({
       return;
     }
 
-    const handleResize = () => {
-      const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      const { top, width: containerWidth } = container.getBoundingClientRect();
+    const handleResize = (entries) => {
+      window.requestAnimationFrame(() => {
+        if (!Array.isArray(entries) || !entries.length) {
+          return;
+        }
 
-      if (containerWidth < 690) {
-        setColumns(1);
-      } else if (containerWidth >= 690 && containerWidth < 1140) {
-        setColumns(2);
-      } else {
-        setColumns(3);
-      }
+        const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        const { top, width: containerWidth } = container.getBoundingClientRect();
 
-      setHeight(viewHeight - top);
-      setWidth(containerWidth);
+        if (containerWidth < 690) {
+          setColumns(1);
+        } else if (containerWidth >= 690 && containerWidth < 1140) {
+          setColumns(2);
+        } else {
+          setColumns(3);
+        }
+
+        setHeight(viewHeight - top);
+        setWidth(containerWidth);
+      });
     };
 
     const resizeObserver = new ResizeObserver(handleResize);

@@ -1,7 +1,7 @@
 {
   "name": "react-marvel-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create a characters search app using Marvel Developer API",
   "main": "index.js",
   "scripts": {
     "test": "jest --setupFiles dotenv/config",
@@ -9,7 +9,7 @@
     "build": "webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dani Telles López",
   "license": "ISC",
   "dependencies": {
     "crypto-js": "^4.0.0",
