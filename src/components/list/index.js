@@ -12,13 +12,17 @@ const ROW_HEIGHT = 488;
 const ITEM_COUNT = 1000;
 
 export const List = ({
-  items, total, loading, search, loadMoreItems,
+  filter, items, total, loading, loadMoreItems,
 }) => {
   const [height, setHeight] = useState(600);
   const [width, setWidth] = useState(1230);
   const [columns, setColumns] = useState(3);
 
   const containerRef = useRef(null);
+
+  const filteredItems = filter
+    ? items.filter(({ name }) => name === filter)
+    : items;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -50,11 +54,11 @@ export const List = ({
   const renderRow = ({ columnIndex, rowIndex, style }) => {
     const index = (rowIndex * columns) + columnIndex;
 
-    if (!items[index]) {
+    if (!filteredItems[index]) {
       return null;
     }
 
-    const { id, ...item } = items[index];
+    const { id, ...item } = filteredItems[index];
 
     return (<ListItem key={item.id} style={style} {...item} />);
   };
@@ -72,7 +76,7 @@ export const List = ({
     const visibleStartIndex = (visibleRowStartIndex * columns) + visibleColumnStartIndex;
     let visibleStopIndex = (visibleRowStopIndex * columns) + visibleColumnStopIndex;
 
-    if (!items[visibleStopIndex]) {
+    if (!filteredItems[visibleStopIndex]) {
       visibleStopIndex -= 1;
     }
 
@@ -82,9 +86,9 @@ export const List = ({
   return (
     <Container ref={containerRef}>
       {loading && (<Loading />)}
-      {!loading && items.length === 0 && (<Paragraph>No results :(</Paragraph>)}
+      {!loading && filteredItems.length === 0 && (<Paragraph>No results :(</Paragraph>)}
       <InfiniteLoader
-        isItemLoaded={(index) => index < items.length}
+        isItemLoaded={(index) => index < filteredItems.length}
         loadMoreItems={handleLoadMoreItems}
         itemCount={total || ITEM_COUNT}
       >
@@ -95,7 +99,7 @@ export const List = ({
             height={height}
             columnWidth={width / columns}
             width={width}
-            rowCount={Math.ceil(items.length / columns)}
+            rowCount={Math.ceil(filteredItems.length / columns)}
             rowHeight={ROW_HEIGHT}
             ref={ref}
           >
@@ -108,6 +112,7 @@ export const List = ({
 };
 
 List.propTypes = {
+  filter: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -127,5 +132,6 @@ List.propTypes = {
 };
 
 List.defaultProps = {
+  filter: '',
   loading: false,
 };

@@ -29,6 +29,13 @@ export const ListItem = ({
 );
 
 ListItem.propTypes = {
+  style: PropTypes.shape({
+    position: PropTypes.string.isRequired,
+    left: PropTypes.number.isRequired,
+    top: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+  }),
   name: PropTypes.string,
   description: PropTypes.string,
   thumbnail: PropTypes.shape({
@@ -42,6 +49,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
+  style: undefined,
   name: '',
   description: '',
   thumbnail: {},

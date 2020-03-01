@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Main } from '../../layout/main';
 import { SearchBar } from '../../components/searchBar';
@@ -9,12 +9,15 @@ import { Search } from './styles';
 export const Home = ({
   isLoading, pagination, characters, fetchCharacters, fetchMoreCharacters,
 }) => {
+  const [filter, setFilter] = useState('');
+
   useEffect(() => {
     fetchCharacters();
   }, []);
 
   const handleOnSubmit = (name) => {
     fetchCharacters({ name });
+    setFilter(name);
   };
 
   return (
@@ -24,6 +27,7 @@ export const Home = ({
         <SearchBar placeholder="Name of character" onSubmit={handleOnSubmit} />
       </Search>
       <List
+        filter={filter}
         items={characters}
         total={pagination.total}
         loading={isLoading}
