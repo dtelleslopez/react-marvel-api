@@ -14,7 +14,7 @@ export const SearchBar = ({ placeholder, onSubmit }) => {
   };
 
   return (
-    <Form onSubmit={handleOnSubmit}>
+    <Form onSubmit={handleOnSubmit} data-cy="search-bar">
       <Input name="search" placeholder={placeholder} />
       <Button type="submit">
         <SearchIcon />

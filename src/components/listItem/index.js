@@ -10,7 +10,7 @@ export const ListItem = ({
   style, name, description, thumbnail: { path, extension }, urls,
 }) => (
   <Wrapper style={style}>
-    <Card>
+    <Card data-cy="list-item">
       <Thumbnail path={`${path}.${extension}`} />
       <Content>
         <Name>{name}</Name>
@@ -18,6 +18,7 @@ export const ListItem = ({
           {description.length === 0 ? '(No description available)' : description}
         </Description>
         <ReadMore
+          data-cy="read-more"
           label="Read more"
           type="arrow"
           target="_blank"

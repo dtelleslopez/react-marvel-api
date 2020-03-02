@@ -90,9 +90,9 @@ export const List = ({
   };
 
   return (
-    <Container ref={containerRef}>
+    <Container ref={containerRef} data-cy="list">
       {loading && (<Loading />)}
-      {!loading && filteredItems.length === 0 && (<Paragraph>No results :(</Paragraph>)}
+      {!loading && filteredItems.length === 0 && (<Paragraph data-cy="no-results">No results :(</Paragraph>)}
       <InfiniteLoader
         isItemLoaded={(index) => index < filteredItems.length}
         loadMoreItems={handleLoadMoreItems}

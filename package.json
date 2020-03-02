@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --setupFiles dotenv/config",
     "start": "webpack-dev-server --history-api-fallback",
-    "build": "webpack"
+    "build": "webpack",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "Dani Telles López",
@@ -31,6 +32,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "cypress": "^4.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
